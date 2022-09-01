@@ -418,7 +418,7 @@ module.exports.login = async function (req, res) {
     }
 
     if(dbRes[0].is_active==0){
-        res.status(400).send({
+        return res.status(400).send({
             message: "user has been blocked!",
             status: "error",
             success: false

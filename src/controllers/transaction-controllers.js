@@ -229,6 +229,11 @@ module.exports.approveTransaction = async(req,res) =>{
         const GET_TRANSACTION_DATA = `SELECT * FROM transactions WHERE id = ?`
         const [TRANSACTION] = await database.execute(GET_TRANSACTION_DATA, [id]);
 
+        // const GET_TRANSACTION_DETAILS = `
+        // SELECT * FROM transaction_items 
+        // JOIN products ON transaction_items.product_id = products.id 
+        // JOIN product_units ON product_units.id = products.product_unit_id
+        // WHERE transaction_id = ?`
         const GET_TRANSACTION_DETAILS = `
         SELECT * FROM transaction_items 
         JOIN products ON transaction_items.product_id = products.id 
@@ -248,10 +253,10 @@ module.exports.approveTransaction = async(req,res) =>{
                         ${count}
                     </td>
                     <td style = "border: 1px solid black; border-collapse: collapse; padding:10px">
-                        ${item.name}
+                        ${item.product_id}
                     </td>
                     <td style = "border: 1px solid black; border-collapse: collapse; padding:10px">
-                        ${item.volume} ${item.unit_name}
+                        ${item.volume}
                     </td>
                     <td style = "border: 1px solid black; border-collapse: collapse; padding:10px">
                         Rp. ${item.price}
@@ -325,7 +330,7 @@ module.exports.approveTransaction = async(req,res) =>{
                                     No.
                                 </th>
                                 <th style = "border: 1px solid black; border-collapse: collapse; padding:10px">
-                                    Product Name
+                                    Product Id
                                 </th>
                                 <th style = "border: 1px solid black; border-collapse: collapse; padding:10px">
                                     Volume
@@ -421,10 +426,10 @@ module.exports.rejectTransaction = async(req,res) =>{
                         ${count}
                     </td>
                     <td style = "border: 1px solid black; border-collapse: collapse; padding:10px">
-                        ${item.name}
+                        ${item.product_id}
                     </td>
                     <td style = "border: 1px solid black; border-collapse: collapse; padding:10px">
-                        ${item.volume} ${item.unit_name}
+                        ${item.volume}
                     </td>
                     <td style = "border: 1px solid black; border-collapse: collapse; padding:10px">
                         Rp. ${item.price}
@@ -499,7 +504,7 @@ module.exports.rejectTransaction = async(req,res) =>{
                                     No.
                                 </th>
                                 <th style = "border: 1px solid black; border-collapse: collapse; padding:10px">
-                                    Product Name
+                                    Product Id
                                 </th>
                                 <th style = "border: 1px solid black; border-collapse: collapse; padding:10px">
                                     Volume
